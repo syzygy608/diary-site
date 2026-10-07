@@ -1,0 +1,16 @@
+name: moji-diary
+
+services:
+  diary:
+    build:
+      context: .
+    container_name: moji-diary
+    init: true
+    restart: unless-stopped
+    environment:
+      HOST: 0.0.0.0
+      PORT: 4173
+    ports:
+      - "127.0.0.1:${MOJI_PORT:-4173}:4173"
+    volumes:
+      - ./entries:/app/entries

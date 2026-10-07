@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", sans-serif;
+  color-scheme: light;
+  --canvas: #f8fafc;
+  --canvas-translucent: rgba(248, 250, 252, .86);
+  --sidebar: #ffffff;
+  --surface: #ffffff;
+  --soft: #edf1f5;
+  --line: #e1e7ef;
+  --ink: #172033;
+  --muted: #6b7587;
+  --accent: #f26522;
+}
+
+.dark {
+  color-scheme: dark;
+  --canvas: #0c1220;
+  --canvas-translucent: rgba(12, 18, 32, .86);
+  --sidebar: #101827;
+  --surface: #141e30;
+  --soft: #1c283c;
+  --line: #263349;
+  --ink: #edf2f9;
+  --muted: #9ca9bc;
+  --accent: #fb7a35;
+}
+
+* { box-sizing: border-box; }
+html { min-width: 320px; }
+body { margin: 0; min-width: 320px; min-height: 100vh; }
+button, input, textarea, select { font: inherit; }
+button { cursor: pointer; }
+button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible { outline: 3px solid color-mix(in srgb, var(--accent) 32%, transparent); outline-offset: 2px; }
+
+.icon-button { @apply size-10 shrink-0 place-items-center rounded-xl transition; color: var(--muted); }
+.icon-button:hover { background: var(--soft); color: var(--ink); }
+.icon-button.danger:hover { @apply bg-red-50 text-red-600 dark:bg-red-500/10 dark:text-red-400; }
+.new-button { @apply flex w-full items-center gap-2 rounded-2xl bg-slate-900 px-4 py-3.5 text-sm font-semibold text-white shadow-lg shadow-slate-950/10 transition hover:-translate-y-0.5 hover:bg-slate-800 dark:bg-orange-500 dark:hover:bg-orange-400; }
+.new-button span { @apply ml-auto text-[.65rem] font-normal opacity-50; }
+.search-field { @apply flex items-center gap-2 rounded-xl px-3 py-2.5; background: var(--soft); color: var(--muted); }
+.search-field input { @apply min-w-0 flex-1 border-0 bg-transparent text-sm outline-none placeholder:text-[var(--muted)]; color: var(--ink); }
+.section-label { @apply text-[.68rem] font-semibold uppercase tracking-[.16em]; color: var(--muted); }
+.tag-filter { @apply rounded-lg px-2.5 py-1.5 text-xs transition; color: var(--muted); background: var(--soft); }
+.tag-filter:hover, .tag-filter.active { background: color-mix(in srgb, var(--accent) 13%, var(--surface)); color: var(--accent); }
+.entry-card { @apply my-1 flex w-full items-center gap-3 rounded-2xl px-3 py-3 text-left transition; }
+.entry-card:hover { background: var(--soft); }
+.entry-card.active { background: color-mix(in srgb, var(--accent) 9%, var(--surface)); box-shadow: inset 3px 0 var(--accent); }
+.entry-date { @apply flex w-8 shrink-0 flex-col items-center; }
+.entry-date b { @apply text-lg font-semibold leading-5; }
+.entry-date small { @apply mt-1 text-[.62rem]; color: var(--muted); }
+.mood-dot { @apply grid size-7 shrink-0 place-items-center rounded-full text-[.68rem] font-medium; color: var(--accent); background: color-mix(in srgb, var(--accent) 11%, var(--surface)); }
+.empty-list { @apply mx-3 mt-10 flex flex-col items-center gap-3 rounded-2xl border border-dashed py-8 text-center text-sm; border-color: var(--line); color: var(--muted); }
+
+.mode-switch { @apply flex rounded-xl p-1; background: var(--soft); }
+.mode-switch button { @apply rounded-lg px-4 py-1.5 text-sm transition; color: var(--muted); }
+.mode-switch button.active { background: var(--surface); color: var(--ink); box-shadow: 0 2px 9px rgba(15,23,42,.08); }
+.secondary-button { @apply items-center justify-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-medium transition; border-color: var(--line); background: var(--surface); color: var(--ink); }
+.secondary-button:hover { background: var(--soft); }
+.save-button { @apply flex items-center gap-2 rounded-xl bg-orange-500 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-orange-500/20 transition hover:bg-orange-600 disabled:opacity-60; }
+.delete-button { @apply rounded-xl bg-red-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-red-700; }
+
+.journal-title { font-family: ui-serif, Georgia, "Noto Serif TC", serif; @apply text-4xl font-semibold leading-tight tracking-tight sm:text-5xl; }
+.mood-pill, .read-tag { @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium; background: var(--soft); }
+.mood-pill { color: var(--accent); }
+.prose-journal { font-family: ui-serif, Georgia, "Noto Serif TC", serif; @apply text-[1.08rem] leading-9; color: color-mix(in srgb, var(--ink) 92%, transparent); }
+.prose-journal h1, .prose-journal h2, .prose-journal h3 { @apply mt-10 mb-4 font-semibold leading-tight; color: var(--ink); }
+.prose-journal h1 { @apply text-3xl; }.prose-journal h2 { @apply text-2xl; }.prose-journal h3 { @apply text-xl; }
+.prose-journal p { @apply my-5; }.prose-journal ul, .prose-journal ol { @apply my-5 pl-7; }.prose-journal ul { @apply list-disc; }.prose-journal ol { @apply list-decimal; }
+.prose-journal blockquote { @apply my-7 border-l-4 pl-5 italic; border-color: var(--accent); color: var(--muted); }
+.prose-journal code { @apply rounded-md px-1.5 py-1 text-[.9em]; background: var(--soft); }.prose-journal pre { @apply my-6 overflow-x-auto rounded-2xl p-5; background: #111827; color: #e5e7eb; }.prose-journal pre code { background: transparent; padding: 0; }
+.prose-journal a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }.prose-journal hr { @apply my-10 border-0 border-t; border-color: var(--line); }
+
+.editor-shell { @apply rounded-3xl border shadow-xl shadow-slate-900/[.04]; border-color: var(--line); background: var(--surface); }
+.editor-meta { @apply border-b px-6 py-7 sm:px-10; border-color: var(--line); }
+.title-input { @apply w-full border-0 bg-transparent text-3xl font-semibold tracking-tight outline-none placeholder:text-[var(--muted)] sm:text-4xl; color: var(--ink); }
+.meta-field { @apply flex items-center gap-2 rounded-xl border px-3 py-2 text-sm; border-color: var(--line); color: var(--muted); }
+.meta-field input, .meta-field select { @apply border-0 bg-transparent outline-none; color: var(--ink); }
+.tag-picker { @apply relative min-w-[15rem] flex-1; }
+.tag-editor { @apply flex w-full flex-wrap items-center gap-2 rounded-xl border px-3 py-2 text-sm; border-color: var(--line); color: var(--muted); }
+.tag-editor > span { @apply rounded-lg px-2 py-1 text-xs; background: color-mix(in srgb, var(--accent) 10%, var(--surface)); color: var(--accent); }.tag-editor > span button { @apply ml-1.5; }
+.tag-editor input { @apply min-w-[5rem] flex-1 border-0 bg-transparent outline-none; color: var(--ink); }
+.tag-suggestions { @apply absolute left-0 right-0 top-[calc(100%+.5rem)] z-30 overflow-hidden rounded-2xl border p-1.5 shadow-2xl shadow-slate-950/15; border-color: var(--line); background: var(--surface); }
+.tag-suggestions-label { @apply px-3 pb-1 pt-1.5 text-[.68rem] font-semibold uppercase tracking-[.14em]; color: var(--muted); }
+.tag-suggestion { @apply flex w-full items-center gap-2 rounded-xl px-3 py-2.5 text-left text-sm transition; color: var(--ink); }
+.tag-suggestion small { @apply ml-auto text-xs; color: var(--muted); }
+.tag-suggestion:hover, .tag-suggestion.active { background: var(--soft); color: var(--accent); }
+.tag-suggestion.create { color: var(--accent); }
+.markdown-editor { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; @apply block min-h-[38rem] w-full resize-y border-0 bg-transparent px-6 py-8 text-base leading-8 outline-none placeholder:text-[var(--muted)] sm:px-10; color: var(--ink); }
+.editor-status { @apply flex items-center justify-between border-t px-6 py-3 text-xs sm:px-10; border-color: var(--line); color: var(--muted); background: color-mix(in srgb, var(--soft) 50%, transparent); }
+.preview-empty { @apply flex min-h-[30rem] flex-col items-center justify-center gap-4 text-sm; color: var(--muted); }
+
+.toast { @apply fixed bottom-6 left-1/2 z-[60] flex -translate-x-1/2 items-center gap-2 whitespace-nowrap rounded-2xl bg-slate-900 px-4 py-3 text-sm font-medium text-white shadow-2xl dark:bg-white dark:text-slate-900; }
+.toast-enter-active,.toast-leave-active { transition: all .25s ease; }.toast-enter-from,.toast-leave-to { opacity: 0; transform: translate(-50%, 12px); }
+.dialog-card { @apply w-full max-w-md rounded-3xl border p-7 shadow-2xl; border-color: var(--line); background: var(--surface); }
+
+@media (max-width: 640px) {
+  .journal-title { overflow-wrap: anywhere; }
+  .markdown-editor { min-height: calc(100vh - 22rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}

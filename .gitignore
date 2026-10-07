@@ -1,0 +1,6 @@
+node_modules/
+dist/
+entries/
+!entries/2026-10-07-歡迎來到墨記.md
+.DS_Store
+*.log
