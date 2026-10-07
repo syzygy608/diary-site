@@ -64,7 +64,8 @@ const groupedEntries = computed(() => {
   })
   return groups
 })
-const rendered = computed(() => md.render((mode.value === 'edit' ? draft.content : active.value?.content) || ''))
+const renderedEntry = computed(() => md.render(active.value?.content || ''))
+const renderedDraft = computed(() => md.render(draft.content || ''))
 const wordCount = computed(() => (draft.content.match(/[\u4e00-\u9fff]|[a-zA-Z0-9]+/g) || []).length)
 const readMinutes = computed(() => Math.max(1, Math.ceil(wordCount.value / 300)))
 const hasChanges = computed(() => {
@@ -388,7 +389,7 @@ onBeforeUnmount(() => {
               <span>{{ (active.content.match(/[\u4e00-\u9fff]|[a-zA-Z0-9]+/g) || []).length }} 字</span>
             </div>
           </div>
-          <div class="prose-journal" v-html="rendered" />
+          <div class="prose-journal" v-html="renderedEntry" />
           <div class="mt-16 flex items-center gap-4 border-t border-[var(--line)] pt-6 text-sm text-[var(--muted)]"><span class="h-px w-8 bg-orange-500" />最後修改於 {{ new Date(active.updatedAt).toLocaleString('zh-TW', { dateStyle: 'medium', timeStyle: 'short' }) }}</div>
         </article>
 
@@ -448,7 +449,7 @@ onBeforeUnmount(() => {
               <div class="editor-status"><span>支援 Markdown</span><span>{{ wordCount }} 字 · 約 {{ readMinutes }} 分鐘</span></div>
             </div>
             <div v-else class="min-h-[38rem] px-6 py-8 sm:px-12 sm:py-12">
-              <div v-if="draft.content" class="prose-journal" v-html="rendered" />
+              <div v-if="draft.content" class="prose-journal" v-html="renderedDraft" />
               <div v-else class="preview-empty"><BookOpenText :size="36" /><p>開始書寫後，預覽會出現在這裡</p></div>
             </div>
           </div>

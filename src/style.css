@@ -67,6 +67,7 @@ button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-
 .mood-pill, .read-tag { @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium; background: var(--soft); }
 .mood-pill { color: var(--accent); }
 .prose-journal { font-family: ui-serif, Georgia, "Noto Serif TC", serif; @apply text-[1.08rem] leading-9; color: color-mix(in srgb, var(--ink) 92%, transparent); }
+.prose-journal strong { font-weight: 800; color: var(--ink); color: var(--accent); }
 .prose-journal h1, .prose-journal h2, .prose-journal h3 { @apply mt-10 mb-4 font-semibold leading-tight; color: var(--ink); }
 .prose-journal h1 { @apply text-3xl; }.prose-journal h2 { @apply text-2xl; }.prose-journal h3 { @apply text-xl; }
 .prose-journal p { @apply my-5; }.prose-journal ul, .prose-journal ol { @apply my-5 pl-7; }.prose-journal ul { @apply list-disc; }.prose-journal ol { @apply list-decimal; }
